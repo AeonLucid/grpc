@@ -91,17 +91,7 @@ HttpSchemeMetadata::ValueType SchemeFromArgs(const ChannelArgs& args) {
 }
 
 Slice UserAgentFromArgs(const ChannelArgs& args, const char* transport_name) {
-  std::vector<std::string> fields;
-  auto add = [&fields](absl::string_view x) {
-    if (!x.empty()) fields.push_back(std::string(x));
-  };
-
-  add(args.GetString(GRPC_ARG_PRIMARY_USER_AGENT_STRING).value_or(""));
-  add(absl::StrFormat("grpc-c/%s (%s; %s)", grpc_version_string(),
-                      GPR_PLATFORM_STRING, transport_name));
-  add(args.GetString(GRPC_ARG_SECONDARY_USER_AGENT_STRING).value_or(""));
-
-  return Slice::FromCopiedString(absl::StrJoin(fields, " "));
+  return Slice::FromCopiedString(args.GetString(GRPC_ARG_PRIMARY_USER_AGENT_STRING).value_or(""));
 }
 }  // namespace
 

@@ -1441,10 +1441,7 @@ def _unsubscribe(state, callback):
 
 def _augment_options(base_options, compression):
     compression_option = _compression.create_channel_option(compression)
-    return tuple(base_options) + compression_option + ((
-        cygrpc.ChannelArgKey.primary_user_agent_string,
-        _USER_AGENT,
-    ),)
+    return tuple(base_options) + compression_option
 
 
 def _separate_channel_options(options):

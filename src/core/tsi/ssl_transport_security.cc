@@ -2008,6 +2008,10 @@ static int verify_cb(int ok, X509_STORE_CTX* ctx) {
   return ok;
 }
 
+static ssl_verify_result_t peer_verify_cb(SSL* ssl, uint8_t* out_alert) {
+  return ssl_verify_ok;
+}
+
 /* --- tsi_ssl_handshaker_factory constructors. --- */
 
 static tsi_ssl_handshaker_factory_vtable client_handshaker_factory_vtable = {
@@ -2161,6 +2165,8 @@ tsi_result tsi_create_ssl_client_handshaker_factory_with_options(
     }
   }
 #endif
+
+  SSL_CTX_set_custom_verify(ssl_context, SSL_VERIFY_PEER, &peer_verify_cb);
 
   *factory = impl;
   return TSI_OK;

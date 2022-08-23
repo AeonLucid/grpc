@@ -146,11 +146,11 @@ config_setting(
 python_config_settings()
 
 # This should be updated along with build_handwritten.yaml
-g_stands_for = "galley"  # @unused
+g_stands_for = "gooy"  # @unused
 
 core_version = "27.0.0"  # @unused
 
-version = "1.50.0-dev"  # @unused
+version = "1000.0.0-dev"  # @unused
 
 GPR_PUBLIC_HDRS = [
     "include/grpc/support/alloc.h",

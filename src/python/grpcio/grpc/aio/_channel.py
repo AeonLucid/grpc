@@ -59,14 +59,8 @@ else:
 
 def _augment_channel_arguments(base_options: ChannelArgumentType,
                                compression: Optional[grpc.Compression]):
-    compression_channel_argument = _compression.create_channel_option(
-        compression)
-    user_agent_channel_argument = ((
-        cygrpc.ChannelArgKey.primary_user_agent_string,
-        _USER_AGENT,
-    ),)
-    return tuple(base_options
-                ) + compression_channel_argument + user_agent_channel_argument
+    compression_channel_argument = _compression.create_channel_option(compression)
+    return tuple(base_options) + compression_channel_argument
 
 
 class _BaseMultiCallable:
